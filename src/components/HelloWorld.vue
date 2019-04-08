@@ -6,12 +6,23 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: null
     }
+  },
+  created () {
+    axios
+      .get('http://localhost:8080/test')
+      .then(response => (this.msg = response))
   }
 }
 </script>
