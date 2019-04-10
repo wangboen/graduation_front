@@ -6,12 +6,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-Vue.use(VueAxios, axios)
-
 export default {
   name: 'HelloWorld',
   data () {
@@ -20,9 +14,9 @@ export default {
     }
   },
   created () {
-    axios
+    this.axios
       .get('http://localhost:8080/test')
-      .then(response => (this.msg = response))
+      .then(response => (this.msg = response.data))
   }
 }
 </script>
