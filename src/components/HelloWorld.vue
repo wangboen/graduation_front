@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <router-link to="/Test">页面跳转测试</router-link>
   </div>
 </template>
 
@@ -10,13 +9,8 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: null
+      msg: 'Hello World'
     }
-  },
-  created () {
-    this.axios
-      .get('http://localhost:8080/test')
-      .then(response => (this.msg = response.data))
   }
 }
 </script>

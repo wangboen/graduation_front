@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Test from '@/components/Test'
+import List from '@/components/List'
+import Transaction from '@/components/Transaction'
+import Authorization from '@/components/Authorization'
+import Information from '@/components/Information'
 
 Vue.use(Router)
 
@@ -10,12 +12,27 @@ export default new Router({
     {
       path: '/',
       name: 'HelloWorld',
-      component: HelloWorld
+      component: List
     },
     {
-      path: '/Test',
-      name: 'Test',
-      component: Test
+      path: '/list',
+      name: 'List',
+      component: List
+    },
+    {
+      path: '/transaction',
+      name: 'Transaction',
+      component: Transaction
+    },
+    {
+      path: '/authorization',
+      name: 'Authorization',
+      component: Authorization
+    },
+    {
+      path: '/information',
+      name: 'information',
+      component: Information
     }
   ]
 })

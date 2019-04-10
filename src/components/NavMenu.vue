@@ -1,10 +1,10 @@
 <template>
     <div id="NavMenu">
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+      <el-menu :default-active="this.$route.path" router mode="horizontal" @select="handleSelect"
                background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-        <el-menu-item index="1">专利列表</el-menu-item>
-        <el-menu-item index="2">专利交易</el-menu-item>
-        <el-menu-item index="3">专利授权使用</el-menu-item>
+        <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
+          {{ item.navItem }}
+        </el-menu-item>
       </el-menu>
     </div>
 </template>
@@ -14,12 +14,12 @@ export default {
   name: 'NavMenu',
   data () {
     return {
-      activeIndex: '1'
-    }
-  },
-  methods: {
-    handleSelect (key, keyPath) {
-      this.$emit('IndexChange', key)
+      navList: [
+        {name: '/list', navItem: '专利列表'},
+        {name: '/transaction', navItem: '专利交易'},
+        {name: '/authorization', navItem: '专利授权'},
+        {name: '/information', navItem: '专利详情'}
+      ]
     }
   }
 }
