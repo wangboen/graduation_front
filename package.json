@@ -18,7 +18,11 @@
     "vue-router": "^3.0.1",
     "axios": "latest",
     "vue-axios": "latest",
-    "element-ui": "latest"
+    "element-ui": "latest",
+    "vuex": "latest",
+    "vue-cookie": "latest",
+    "js-md5": "latest",
+    "crypto-js": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

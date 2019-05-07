@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <NavMenu @IndexChange="getIndex"/>
+    <NavMenu/>
     <router-view/>
+    <Footer/>
+    <Log/>
   </div>
 </template>
 
 <script>
 import NavMenu from '@/components/NavMenu'
+import Log from '@/components/log'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'App',
   components: {
-    NavMenu
+    Footer,
+    NavMenu,
+    Log
   }
 }
 </script>
@@ -23,6 +29,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 </style>

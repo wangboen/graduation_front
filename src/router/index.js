@@ -4,6 +4,7 @@ import List from '@/components/List'
 import Transaction from '@/components/Transaction'
 import Authorization from '@/components/Authorization'
 import Information from '@/components/Information'
+import Message from '@/components/Message'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/information',
       name: 'information',
       component: Information
+    },
+    {
+      path: '/message',
+      name: 'message',
+      component: Message
     }
   ]
 })
