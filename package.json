@@ -22,7 +22,11 @@
     "vuex": "latest",
     "vue-cookie": "latest",
     "js-md5": "latest",
-    "crypto-js": "latest"
+    "crypto-js": "latest",
+    "sockjs-client": "latest",
+    "stompjs": "latest",
+    "sockjs": "latest",
+    "stomp": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

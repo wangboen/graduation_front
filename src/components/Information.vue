@@ -1,50 +1,50 @@
 <template>
-    <div id="Information">
-      <div class="content">
-        <h1>{{msg.name}}</h1>
-        <p>    专利ID ： {{msg.id}}</p>
-        <p>    专利申请号 ： {{msg.UID}}</p>
-        <p>    专利所有人 ： {{msg.owner}}</p>
-        <p>    专利发明人 ： {{msg.inventor}}</p>
-        <p>    专利详情 ： {{msg.content}}</p>
-        <img v-bind:src="msg.upload" alt="" width="400px" height="300px"/>
-      </div>
-
-      <el-tabs tab-position="left" class="action">
-        <el-tab-pane label="交易申请">
-          <el-form ref="TransactionForm" :model="TransactionForm" label-width="200px">
-            <el-form-item label="交易价格">
-              <el-input v-model="TransactionForm.amount" label="单位为CNY"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="TransactionSubmit">提交申请</el-button>
-            </el-form-item>
-          </el-form>
-        </el-tab-pane>
-
-        <el-tab-pane label="授权许可申请">
-          <el-form ref="AuthorizationForm" :model="AuthorizationForm" label-width="200px">
-            <el-form-item label="授权许可价格">
-              <el-input v-model="AuthorizationForm.amount" label="单位为CNY"></el-input>
-            </el-form-item>
-            <el-form-item label="授权许可开始时间">
-              <el-date-picker type="date" v-model="AuthorizationForm.begin" value-format=" yyyy-MM-dd"></el-date-picker>
-            </el-form-item>
-            <el-form-item label="授权许可结束时间">
-              <el-date-picker type="date" v-model="AuthorizationForm.end" value-format=" yyyy-MM-dd"></el-date-picker>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="AuthorizationSubmit">提交申请</el-button>
-            </el-form-item>
-          </el-form>
-        </el-tab-pane>
-      </el-tabs>
-
-      <div class="flow">
-        <h1>交易流程</h1>
-        <img src="http://localhost:80/flow.png" alt="" width="100%" height="100%"/>
-      </div>
+  <div id="Information">
+    <div class="content">
+      <h1>{{msg.name}}</h1>
+      <p>    专利ID ： {{msg.id}}</p>
+      <p>    专利申请号 ： {{msg.UID}}</p>
+      <p>    专利所有人 ： <a @click="message">{{msg.owner}}</a></p>
+      <p>    专利发明人 ： {{msg.inventor}}</p>
+      <p>    专利详情 ： {{msg.content}}</p>
+      <img v-bind:src="msg.upload" alt="" width="400px" height="300px"/>
     </div>
+
+    <el-tabs tab-position="left" class="action">
+      <el-tab-pane label="交易申请">
+        <el-form ref="TransactionForm" :model="TransactionForm" label-width="200px">
+          <el-form-item label="交易价格">
+            <el-input v-model="TransactionForm.amount" label="单位为CNY"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="TransactionSubmit">提交申请</el-button>
+          </el-form-item>
+        </el-form>
+      </el-tab-pane>
+
+      <el-tab-pane label="授权许可申请">
+        <el-form ref="AuthorizationForm" :model="AuthorizationForm" label-width="200px">
+          <el-form-item label="授权许可价格">
+            <el-input v-model="AuthorizationForm.amount" label="单位为CNY"></el-input>
+          </el-form-item>
+          <el-form-item label="授权许可开始时间">
+            <el-date-picker type="date" v-model="AuthorizationForm.begin" value-format=" yyyy-MM-dd"></el-date-picker>
+          </el-form-item>
+          <el-form-item label="授权许可结束时间">
+            <el-date-picker type="date" v-model="AuthorizationForm.end" value-format=" yyyy-MM-dd"></el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="AuthorizationSubmit">提交申请</el-button>
+          </el-form-item>
+        </el-form>
+      </el-tab-pane>
+    </el-tabs>
+
+    <div class="flow">
+      <h1>交易流程</h1>
+      <img src="http://localhost:80/flow.png" alt="" width="100%" height="100%"/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -119,6 +119,15 @@ export default {
           alert('申请发送失败')
           console.log(error)
         })
+    },
+    message () {
+      this.$router.push({
+        path: '/message',
+        query: {
+          id: this.msg.id,
+          name: this.msg.owner
+        }
+      })
     }
   }
 }

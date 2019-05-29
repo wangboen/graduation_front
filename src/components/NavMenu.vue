@@ -21,7 +21,8 @@ export default {
         {name: '/list', navItem: '专利列表'},
         {name: '/transaction', navItem: '专利交易'},
         {name: '/authorization', navItem: '专利授权'},
-        {name: '/information', navItem: '专利详情'}
+        {name: '/information', navItem: '专利详情'},
+        {name: '/message', navItem: '私信消息'}
       ],
       log: ''
     }
@@ -54,6 +55,7 @@ export default {
             }
             this.$cookie.set('isLogin', 'true', 60 * 60 * 24)
             alert('自动登录成功')
+            this.$store.commit('login', form.name)
           } else if (response.data === 'failed') {
             this.form.name = ''
             this.form.password = ''
