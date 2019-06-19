@@ -60,6 +60,21 @@ const actions = {
   hideLog (context) {
     context.commit('hideLog')
   },
+  toggleNFDot (state, newValue) {
+    state.nfDot = newValue
+  },
+  updateMsgList (state, newMsgList) {
+    state.msgList = newMsgList
+  },
+  updateCurrentFriend (state, newFriend) {
+    state.currentFriend = newFriend
+  },
+  addValue2DotMap (state, key) {
+    state.isDotMap.set(key, '您有未读消息')
+  },
+  removeValueDotMap (state, key) {
+    state.isDotMap.delete(key)
+  },
   connect (context) {
     context.state.stomp = Stomp.over(new SockJS('http://localhost:8080/ws/endpointChat'))
     context.state.stomp.connect({

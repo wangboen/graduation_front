@@ -10,6 +10,48 @@
       <img v-bind:src="msg.upload" alt="" width="400px" height="300px"/>
     </div>
 
+    <h1>历史交易记录</h1>
+    <el-table :data="tableData1" style="width: 100%" border
+              :default-sort = "{prop: 'date', order: 'ascending'}">
+      <el-table-column prop="id" label="交易申请号" align="center"></el-table-column>
+      <el-table-column prop="from" label="交易发起人" align="center"></el-table-column>
+      <el-table-column prop="date" label="交易请求发送日期" align="center" sortable></el-table-column>
+      <el-table-column prop="amount" label="交易报价（CNY）" align="center" sortable></el-table-column>
+    </el-table>
+
+    <el-pagination
+      background
+      @size-change="handleSizeChange1"
+      @current-change="handleCurrentChange1"
+      :current-page="currentPage1"
+      :page-sizes="[5, 10, 20, 50]"
+      :page-size="pageSize1"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total1">
+    </el-pagination>
+
+    <h1>历史授权记录</h1>
+    <el-table :data="tableData2" style="width: 100%" border
+              :default-sort = "{prop: 'date', order: 'ascending'}">
+      <el-table-column prop="id" label="授权申请号" align="center"></el-table-column>
+      <el-table-column prop="from" label="授权发起人" align="center"></el-table-column>
+      <el-table-column prop="date" label="授权请求发送日期" align="center" sortable></el-table-column>
+      <el-table-column prop="begin" label="授权开始时间" align="center" sortable></el-table-column>
+      <el-table-column prop="end" label="授权开始时间" align="center" sortable></el-table-column>
+      <el-table-column prop="amount" label="授权报价" align="center" sortable></el-table-column>
+    </el-table>
+
+    <el-pagination
+      background
+      @size-change="handleSizeChange2"
+      @current-change="handleCurrentChange2"
+      :current-page="currentPage2"
+      :page-sizes="[5, 10, 20, 50]"
+      :page-size="pageSize2"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total2">
+    </el-pagination>
+
     <el-tabs tab-position="left" class="action">
       <el-tab-pane label="交易申请">
         <el-form ref="TransactionForm" :model="TransactionForm" label-width="200px">
@@ -68,7 +110,17 @@ export default {
         amount: null,
         begin: null,
         end: null
-      }
+      },
+      tableData1: null,
+      fetchData1: null,
+      total1: 0,
+      pageSize1: 5,
+      currentPage1: 1,
+      tableData2: null,
+      fetchData2: null,
+      total2: 0,
+      pageSize2: 5,
+      currentPage2: 1
     }
   },
   created () {
@@ -82,6 +134,8 @@ export default {
       .catch(errmessages => (
         console.log(errmessages)
       ))
+    this.getAuthorizationData()
+    this.getTransactionData()
   },
   methods: {
     TransactionSubmit () {
@@ -128,6 +182,52 @@ export default {
           name: this.msg.owner
         }
       })
+    },
+    getTransactionData () {
+      this.axios
+        .post('http://localhost:8080/transactionlist', {
+          UID: 'CN201210309671.7'
+        })
+        .then((response) => {
+          this.fetchData1 = response.data
+          this.total1 = this.fetchData1.length
+          this.tableData1 = this.fetchData1.slice(0, this.pageSize1)
+        })
+        .catch(errmessages => (
+          console.log(errmessages)
+        ))
+    },
+    handleSizeChange1 (val) {
+      this.pageSize1 = val
+      this.currentPage1 = 1
+      this.tableData1 = this.fetchData1.slice(0, this.pageSize1)
+    },
+    handleCurrentChange1 (val) {
+      this.currentPage1 = val
+      this.tableData1 = this.fetchData1.slice(this.pageSize1 * (val - 1), this.pageSize1 * val)
+    },
+    getAuthorizationData () {
+      this.axios
+        .post('http://localhost:8080/authorizationlist', {
+          UID: 'CN201210309671.7'
+        })
+        .then((response) => {
+          this.fetchData2 = response.data
+          this.total2 = this.fetchData2.length
+          this.tableData2 = this.fetchData2.slice(0, this.pageSize2)
+        })
+        .catch(errmessages => (
+          console.log(errmessages)
+        ))
+    },
+    handleSizeChange2 (val) {
+      this.pageSize2 = val
+      this.currentPage2 = 1
+      this.tableData2 = this.fetchData2.slice(0, this.pageSize2)
+    },
+    handleCurrentChange2 (val) {
+      this.currentPage2 = val
+      this.tableData2 = this.fetchData2.slice(this.pageSize2 * (val - 1), this.pageSize2 * val)
     }
   }
 }
@@ -141,10 +241,6 @@ export default {
     padding: 0 20px;
     height: 100%;
     text-align: left;
-  }
-  h1{
-    font-size: 24px;
-    line-height: 32px;
   }
   p{
     font-size: 16px;

@@ -4,7 +4,7 @@
         <el-aside width="160px">
           <div class="friendListDiv" v-for="(user) in users" :key="user.id" @click="toggleFriend(user)"
                v-bind:class="{currentChatFriend:currentFriend.id===user.id}">
-            <el-badge :is-dot="isDotMap.get('isDot#'+currentUser.username+'#'+user.name)!=null">{{user.name}}</el-badge>
+            <el-badge :is-dot="isDotMap.get('isDot#'+currentUser.name+'#'+user.name)!=null">{{user.name}}</el-badge>
           </div>
         </el-aside>
 
@@ -22,6 +22,7 @@
               <div v-if="msg.from===currentFriend.name"
                 style="display: flex;justify-content: flex-start;align-items: center;box-sizing: border-box;"
                 v-bind:key="msg.id">
+                <p>{{currentFriend.name}}  </p>
                 <div
                   style="display: inline-flex;border-style: solid;border-width: 1px;border-color: #20a0ff;border-radius: 5px;padding: 5px 8px 5px 8px">
                   {{msg.msg}}
@@ -36,6 +37,7 @@
                   style="display: inline-flex;border-style: solid;border-width: 1px;border-color: #20a0ff;border-radius: 5px;padding: 5px 8px 5px 8px;margin-right: 3px;background-color: #9eea6a">
                   {{msg.msg}}
                 </div>
+                <p>  {{currentUser.name}}</p>
               </div>
             </template>
 

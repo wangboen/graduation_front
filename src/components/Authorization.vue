@@ -113,6 +113,6 @@ export default {
     border-left: 3px #f5f6f7 solid;
     border-right: 3px #f5f6f7 solid;
     padding: 0 20px;
-    height: 100%;
+    min-height: 840px;
   }
 </style>

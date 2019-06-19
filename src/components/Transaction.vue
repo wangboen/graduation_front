@@ -117,7 +117,4 @@ export default {
     padding: 20px;
     min-height: 840px;
   }
-  h1{
-    text-align: left;
-  }
 </style>
